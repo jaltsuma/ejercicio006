@@ -1,20 +1,26 @@
 package es.cic.bootcamp.ejercicio006.coche;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CocheController {
-	public static final String MENSAJE_PARTIDA = "Adios mundo cruel";
-	public static final String MENSAJE_BIENVENIDA = "Hola mundo";
-
+	@Autowired
+	private CocheService cocheService;
+	
+	
 	@GetMapping("/entrada")
-	public String entrada() {
-		return MENSAJE_BIENVENIDA;	
+	public String darBienvenida() {
+		return cocheService.darBienvenida();	
 	}
 	
 	@GetMapping("/salida")
-	public String adios() {
-		return MENSAJE_PARTIDA;
+	public String despedir() {
+		return cocheService.despedir();
+	}
+
+	public void setCocheService(CocheService cocheService) {
+		this.cocheService = cocheService;
 	}
 }
